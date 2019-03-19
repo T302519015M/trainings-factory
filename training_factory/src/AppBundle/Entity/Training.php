@@ -49,6 +49,15 @@ class Training
      */
     private $cost;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Lesson", mappedBy="training")
+     */
+    private $lessons;
+
+    public function __construct()
+    {
+        $this->lessons = new ArrayCollection();
+    }
 
     /**
      * Get id

@@ -49,6 +49,30 @@ class Lesson
      */
     private $maxPersons;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Person", inversedBy="lessons")
+     * @ORM\JoinColumn(name="instructor_id", referencedColumnName="id")
+     */
+    private $instructor;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Training", inversedBy="lessons")
+     * @ORM\JoinColumn(name="training_id", referencedColumnName="id")
+     */
+    private $training;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Registration", mappedBy="lesson")
+     */
+    private $registrations;
+
+    public function __construct()
+    {
+        $this->registrations = new ArrayCollection();
+    }
+
+
 
     /**
      * Get id
@@ -155,5 +179,6 @@ class Lesson
     {
         return $this->maxPersons;
     }
+
 }
 

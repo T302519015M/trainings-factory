@@ -28,6 +28,18 @@ class Registration
      */
     private $payment;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Lesson", inversedBy="registrations")
+     * @ORM\JoinColumn(name="lesson_id", referencedColumnName="id")
+     */
+    private $lesson;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Person", inversedBy="registrations")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     */
+    private $member;
+
 
     /**
      * Get id
