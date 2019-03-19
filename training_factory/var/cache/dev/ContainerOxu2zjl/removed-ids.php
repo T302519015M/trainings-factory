@@ -202,6 +202,7 @@ return [
     'doctrine.mapping_info_command' => true,
     'doctrine.orm.configuration' => true,
     'doctrine.orm.container_repository_factory' => true,
+    'doctrine.orm.default_annotation_metadata_driver' => true,
     'doctrine.orm.default_configuration' => true,
     'doctrine.orm.default_entity_listener_resolver' => true,
     'doctrine.orm.default_entity_manager.event_manager' => true,

@@ -1,6 +1,6 @@
 <?php
 
-namespace ContainerUpyeqct;
+namespace ContainerOxu2zjl;
 
 use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -2167,7 +2167,7 @@ class appDevDebugProjectContainer extends Container
             'database_port' => 3306,
             'database_name' => 'symfony',
             'database_user' => 'root',
-            'database_password' => NULL,
+            'database_password' => 'root',
             'mailer_transport' => 'smtp',
             'mailer_host' => '127.0.0.1',
             'mailer_user' => NULL,
