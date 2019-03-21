@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Training Factory</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
+                <li><a href="{{'training/list'}}">training</a></li>
+                <li><a href="#">lessen</a></li>
+                <li><a href="#">trainers</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<div class="container-fluid training-box">
+
+    {%  for msg in app.session.flashBag.get('training-success') %}
+        <div class="alert alert-success">
+            {{ msg }}
+        </div>
+
+    {%  endfor %}
+    <div class="row"></div>
+    {% for training in trainingen %}
+        <div class="card col-sm-2" style="width: 26rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{training.name}}</h5>
+                <p class="card-text">{{training.description}}</p>
+                <p class="card-text">Duration: {{training.duration}} minutes <br>Extra cost: {{training.cost}} euro's</p>
+                <div class="card-ref">
+                    <a href="#" class="btn btn-primary">join</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block stylesheets %}
+    <style>
+        .training-box{
+            margin-top:8rem;
+        }
+
+        .card{
+            margin-top: 2rem;
+        }
+
+        .card-body{
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 2rem 1rem;
+        }
+
+        .card-title{
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .card-text{
+            font-style: italic;
+        }
+
+        .card-ref {
+            text-align: center;
+        }
+
+        .card-ref a{
+            width: 80px;
+        }
+
+
+    </style>
+{% endblock %}
+
+
+

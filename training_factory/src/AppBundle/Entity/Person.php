@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+//use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Person
@@ -80,9 +81,9 @@ class Person
     /**
      * @var array
      *
-     * @ORM\Column(name="rol", type="string", columnDefinition="enum('instructor', 'member')")
+     * @ORM\Column(name="role", type="json_array")
      */
-    private $rol;
+    private $role;
 
     /**
      * @var \DateTime

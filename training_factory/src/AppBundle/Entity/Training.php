@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Training
@@ -25,6 +27,7 @@ class Training
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank(message="vul een naam in")
      */
     private $name;
 
@@ -43,9 +46,8 @@ class Training
     private $duration;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="cost", type="integer")
+     * @ORM\Column(name="cost", type="decimal",precision=7, scale=2)
      */
     private $cost;
 

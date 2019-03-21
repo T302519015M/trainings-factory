@@ -3,6 +3,12 @@
 {% block body %}
     <div id="wrapper">
         <div id="container">
+            {%  for msg in app.session.flashBag.get('training-success') %}
+                <div class="alert alert-success">
+                    {{ msg }}
+                </div>
+            {%  endfor %}
+
             <div id="welcome">
                 <h1><span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
             </div>
