@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/polyfill-apcu" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/fig/link-util" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/polyfill-php56" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/polyfill-util" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/symfony" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/phpunit-bridge" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/psr/link" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/jdorn/sql-formatter" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/sensiolabs/security-checker" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/doctrine-cache-bundle" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/composer" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/sensio/distribution-bundle" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/incenteev/composer-parameter-handler" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/sensio/generator-bundle" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/training_factory/vendor/swiftmailer/swiftmailer" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />
+</project>
