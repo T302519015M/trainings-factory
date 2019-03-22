@@ -1,14 +1,118 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <h1>Trainingen</h1>
-                    {% for training in trainingen %}
-                        {{ training.name }}
-                    {% endfor %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Training Factory</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('homepage') }}">Home</a></li>
+                <li class="active"><a href="{{path('traininglist')}}">training</a></li>
+                <li><a href="#">lessen</a></li>
+                <li><a href="#">trainers</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid training-box">
+
+        {%  for msg in app.session.flashBag.get('training-success') %}
+            <div class="alert alert-success">
+                {{ msg }}
+            </div>
+
+        {%  endfor %}
+
+        {%  for msg in app.session.flashBag.get('deleted-success') %}
+        <div class="alert alert-success">
+            {{ msg }}
+        </div>
+
+        {% endfor %}
+
+        <div class="row meta-data">
+            <div class="col-sm-1">
+                ID
+            </div>
+            <div class="col-sm-2">
+                Name
+            </div>
+            <div class="col-sm-5">
+                Description
+            </div>
+            <div class="col-sm-1">
+                Duration
+            </div>
+            <div class="col-sm-1">
+                Cost
+            </div>
+            <div class="col-sm-2">
+                options
             </div>
         </div>
+        {% for training in trainingen %}
+            <div class="row">
+                <div class="col-sm-1">
+                    {{ training.id }}
+                </div>
+                <div class="col-sm-2">
+                    {{ training.name }}
+                </div>
+                <div class="col-sm-5">
+                    {{ training.description  }}
+                </div>
+                <div class="col-sm-1">
+                    {{training.duration}} minuten
+                </div>
+                <div class="col-sm-1">
+                    {{training.cost}}
+                </div>
+                <div class="col-sm-2">
+                    <span>
+                        <a title="Edit" href="{{ path('update',{id:training.id}) }}"><i class="fas fa-pen"></i></a>
+                    </span>
+                    <span>
+                       <a  title="Delete" href="{{ path('delete',{id:training.id}) }}"> <i class="fas fa-trash-alt"></i></a>
+                    </span>
+                </div>
+            </div>
+
+        {% endfor %}
+        <div class="add-button">
+            <button class="btn btn-primary">
+                <a href="{{path('addtraining')}}"><i class="fas fa-plus"></i> Add training</a>
+            </button>
+        </div>
     </div>
+
+{% endblock %}
+
+
+{% block stylesheets %}
+    <style>
+        .training-box{
+            margin-top:8rem;
+        }
+
+        .meta-data{
+            font-weight: 900;
+            font-size: 24px;
+            border-bottom: #3c3c3c 1px solid;
+            margin-bottom: 0.5rem;
+        }
+
+        span{
+            margin-right: 0.5rem;
+        }
+
+        .add-button {
+            margin-top:2rem;
+        }
+        .add-button a {
+            color:white;
+            text-decoration: none;
+        }
+
+    </style>
 {% endblock %}

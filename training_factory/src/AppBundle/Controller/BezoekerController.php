@@ -29,7 +29,7 @@ class BezoekerController extends Controller
 
 
     /**
-     * @Route("/training/list", name="admin_afdeling_new")
+     * @Route("/training/list", name="traininglist")
      */
     public function showAction(Request $request)
     {
@@ -43,7 +43,7 @@ class BezoekerController extends Controller
     }
 
     /**
-     * @Route("/training/new", name="admin_afdeling_new")
+     * @Route("/training/new", name="addtraining")
      */
     public function addAction(Request $request)
     {
@@ -67,4 +67,64 @@ class BezoekerController extends Controller
             'afdelingForm'=>$form->createView()
             ]);
     }
+
+    /**
+     * @Route("training/update/{id}", name="update")
+     */
+    public function updateAction(Request $request, $id){
+
+        $repo = $this->getDoctrine()->getRepository(Training::class);
+        $trainingData = $repo->find($id);
+
+        if(!$trainingData){
+            throw $this->createNotFoundException(
+                'Geen training gevonden voor deze ID:'.$id
+            );
+        }
+        
+        $form = $this->createForm(TrainingType::class, $trainingData);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $training = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($training);
+
+            $em->flush();
+            $this->addFlash('training-success', 'training bijgewerkt');
+            return $this->redirectToRoute('traininglist');
+        }
+
+        return $this->render('bezoeker/training/update.html.twig', [
+            'afdelingForm'=>$form->createView(),
+            'trainingData'=>$trainingData
+        ]);
+
+    }
+
+    /**
+     * @Route("training/delete/{id}", name="delete")
+     */
+    public function removeAction(Request $request, $id){
+
+        $repo = $this->getDoctrine()->getRepository(Training::class);
+        $training = $repo->find($id);
+
+        //dump($training);die;
+        $em= $this->getDoctrine()->getManager();
+        $em->remove($training);
+        $em->flush();
+
+        $this->addFlash('deleted-success','training verwijdered');
+        return $this->redirectToRoute('traininglist');
+
+//        $trainingen =$repo->findAll();
+//
+//        return $this->render('bezoeker/training/list.html.twig',['trainingen' => $trainingen]);
+    }
+
+
+
+
 }

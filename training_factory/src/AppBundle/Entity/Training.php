@@ -34,20 +34,23 @@ class Training
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="duration", type="string", length=255)
+     * @ORM\Column(name="duration", type="integer", length=4)
+     * @Assert\NotBlank(message="geeft tijdsduurs op")
+     * @Assert\Range(min=0 ,max=9999)
      */
     private $duration;
 
     /**
      *
-     * @ORM\Column(name="cost", type="decimal",precision=7, scale=2)
+     * @ORM\Column(name="cost", type="decimal",precision=7, scale=2, nullable=true)
+     * @Assert\Range(min=0 ,max=99999)
      */
     private $cost;
 
