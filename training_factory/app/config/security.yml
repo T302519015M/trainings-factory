@@ -5,7 +5,25 @@ security:
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    ryan:
+                        password: $2y$12$0VYtpI.QV8ZOkeTJbYhxPOnkWIQImWfi6aMjP4uC72lpJgYIYQX0u
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: $2y$12$Nh2957IPt.XpNK1RBn.QLeHz7Yk1aqUFgvulqn/IUM0Hx9qUZ5jIa
+                        roles: 'ROLE_ADMIN'
+                    dev:
+                        password: $2y$12$Nh2957IPt.XpNK1RBn.QLeHz7Yk1aqUFgvulqn/IUM0Hx9qUZ5jIa
+                        roles: 'ROLE_DEV'
+                    test:
+                        password: $2y$12$6xaiKvf4fFNaRzDlf0ZCLOJGKFd.efxeYhVoOabWEZwCexmPpvKZC
+                        roles: 'ROLE_ADMIN'
+
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: 'bcrypt'
+            cost:      12
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,10 +33,28 @@ security:
 
         main:
             anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            switch_user: true
+#            logout: true
+#                path: /logout
+#                target: /
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
+#            http_basic: ~
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_ADMINS, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_DEV: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH, ROLE_USER]
+
+    access_control:
+        # require ROLE_ADMIN for /admin*
+        - { path: ^/training/new, roles: ROLE_DEV }
+        - { path: ^/training/list, roles: ROLE_ADMIN }
+#        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/, roles: ROLE_USER }

@@ -7,6 +7,7 @@ use AppBundle\Form\TrainingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class BezoekerController extends Controller
 {
@@ -18,15 +19,12 @@ class BezoekerController extends Controller
         $repo = $this->getDoctrine()->getRepository(Training::class);
         $training = $repo->findAll();
 
-
-
         // replace this example code with whatever you need
         return $this->render('bezoeker/home.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'trainingen' => $training
         ]);
     }
-
 
     /**
      * @Route("/training/list", name="traininglist")
@@ -65,7 +63,7 @@ class BezoekerController extends Controller
 
         return $this->render('bezoeker/training/new.html.twig', [
             'afdelingForm'=>$form->createView()
-            ]);
+        ]);
     }
 
     /**
@@ -81,7 +79,7 @@ class BezoekerController extends Controller
                 'Geen training gevonden voor deze ID:'.$id
             );
         }
-        
+
         $form = $this->createForm(TrainingType::class, $trainingData);
         $form->handleRequest($request);
 
@@ -125,6 +123,21 @@ class BezoekerController extends Controller
     }
 
 
-
+//    /**
+//     * @Route("/login", name="login")
+//     */
+//    public function loginAction(AuthenticationUtils $authenticationUtils)
+//    {
+//        // get the login error if there is one
+//        $error = $authenticationUtils->getLastAuthenticationError();
+//
+//        // last username entered by the user
+//        $lastUsername = $authenticationUtils->getLastUsername();
+//
+//        return $this->render('bezoeker/login.html.twig', [
+//            'last_username' => $lastUsername,
+//            'error'         => $error,
+//        ]);
+//    }
 
 }

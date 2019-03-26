@@ -79,7 +79,6 @@ class Person
     private $email;
 
     /**
-     * @var array
      *
      * @ORM\Column(name="role", type="json_array")
      */
