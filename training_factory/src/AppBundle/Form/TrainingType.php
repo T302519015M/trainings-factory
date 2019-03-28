@@ -24,10 +24,5 @@ class TrainingType extends AbstractType
        ]);
     }
 
-
 }
-
-?>
-
-
 

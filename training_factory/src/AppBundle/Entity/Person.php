@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-//use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Person
@@ -333,30 +333,6 @@ class Person
     }
 
     /**
-     * Set rol
-     *
-     * @param array $rol
-     *
-     * @return Person
-     */
-    public function setRol($rol)
-    {
-        $this->rol = $rol;
-
-        return $this;
-    }
-
-    /**
-     * Get rol
-     *
-     * @return array
-     */
-    public function getRol()
-    {
-        return $this->rol;
-    }
-
-    /**
      * @return \DateTime
      */
     public function getHireDate()
@@ -434,6 +410,22 @@ class Person
     public function setPlace($place)
     {
         $this->place = $place;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 
 }

@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="security_login")
+     * @Route("/login", name="login")
      */
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {

@@ -33,13 +33,13 @@ security:
 
         main:
             anonymous: ~
+            http_basic: ~
             form_login:
                 login_path: login
                 check_path: login
-            switch_user: true
-#            logout: true
-#                path: /logout
-#                target: /
+            logout:
+                path: /logout
+                target: /
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
@@ -49,12 +49,13 @@ security:
             #form_login: ~
 
     role_hierarchy:
-        ROLE_ADMIN: [ROLE_ADMINS, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN: [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
         ROLE_DEV: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH, ROLE_USER]
 
     access_control:
         # require ROLE_ADMIN for /admin*
-        - { path: ^/training/new, roles: ROLE_DEV }
+        - { path: ^/trainer/new, roles: ROLE_DEV }
         - { path: ^/training/list, roles: ROLE_ADMIN }
+        - { path: ^/training/*, roles: ROLE_DEV }
 #        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/, roles: ROLE_USER }

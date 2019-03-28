@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>{{ title }}</h1>
+
+                {{ form_start(trainerForm,{'attr': {'novalidate':'novalidate'}}) }}
+                {{ form_widget(trainerForm) }}
+
+                <button type="submit" class="btn btn-primary">voeg trainer toe</button>
+
+                {{ form_end(trainerForm) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
