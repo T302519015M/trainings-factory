@@ -18,11 +18,13 @@ class BezoekerController extends Controller
     {
         $repo = $this->getDoctrine()->getRepository(Training::class);
         $training = $repo->findAll();
+        $user = $this->getUser();
 
         // replace this example code with whatever you need
         return $this->render('bezoeker/home.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'trainingen' => $training
+            'trainingen' => $training,
+            'user'=> $user
         ]);
     }
 
@@ -33,10 +35,12 @@ class BezoekerController extends Controller
     {
         $repo = $this->getDoctrine()->getRepository(Training::class);
         $trainingen = $repo->findAll();
+        $user = $this->getUser();
 
 
         return $this->render('bezoeker/training/list.html.twig', [
-            'trainingen'=> $trainingen
+            'trainingen'=> $trainingen,
+            'user'=> $user
         ]);
     }
 
@@ -57,7 +61,7 @@ class BezoekerController extends Controller
             $em->persist($training);
 
             $em->flush();
-            $this->addFlash('training-success', 'training toegevoegd');
+            $this->addFlash('success', 'training toegevoegd');
             return $this->redirectToRoute('homepage');
         }
 
@@ -90,7 +94,7 @@ class BezoekerController extends Controller
             $em->persist($training);
 
             $em->flush();
-            $this->addFlash('training-success', 'training bijgewerkt');
+            $this->addFlash('success', 'training bijgewerkt');
             return $this->redirectToRoute('traininglist');
         }
 
@@ -114,7 +118,7 @@ class BezoekerController extends Controller
         $em->remove($training);
         $em->flush();
 
-        $this->addFlash('deleted-success','training verwijdered');
+        $this->addFlash('success','training verwijdered');
         return $this->redirectToRoute('traininglist');
 
 //        $trainingen =$repo->findAll();

@@ -9,9 +9,23 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
                 <li><a href="{{ path('traininglist')}}">training</a></li>
-                <li><a href="#">lessen</a></li>
+                <li><a href="{{ path('list_les') }}">lessen</a></li>
                 <li><a href="{{ path('list_trainer')}}">trainers</a></li>
             </ul>
+            {% if user == null %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path('login') }}">inloggen </a></li>
+                    <li> <a href="#"> registeren</a></li>
+                </ul>
+            {% endif %}
+
+            {% if not user == null %}
+                <div class="nav navbar-right user-detail">
+                <span class="user">
+                    welkom, {{ user.username }} <button class="bnt"><a href="{{ path('logout') }}">uitloggen</a></button>
+                </span>
+                </div>
+            {% endif %}
         </div>
     </nav>
 
@@ -75,7 +89,13 @@
         .card-ref a{
             width: 80px;
         }
+        .user-detail{
+            padding:15px;
+        }
 
+        .user{
+            color:white;
+        }
 
     </style>
 {% endblock %}

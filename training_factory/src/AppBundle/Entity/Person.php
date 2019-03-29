@@ -428,5 +428,37 @@ class Person
         $this->role = $role;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLessons()
+    {
+        return $this->lessons;
+    }
+
+    /**
+     * @param mixed $lessons
+     */
+    public function setLessons($lessons)
+    {
+        $this->lessons = $lessons;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegistrations()
+    {
+        return $this->registrations;
+    }
+
+    /**
+     * @param mixed $registrations
+     */
+    public function setRegistrations($registrations)
+    {
+        $this->registrations = $registrations;
+    }
+
 }
 

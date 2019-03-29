@@ -181,5 +181,53 @@ class Lesson
         return $this->maxPersons;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getInstructor()
+    {
+        return $this->instructor;
+    }
+
+    /**
+     * @param mixed $instructor
+     */
+    public function setInstructor($instructor)
+    {
+        $this->instructor = $instructor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTraining()
+    {
+        return $this->training;
+    }
+
+    /**
+     * @param mixed $training
+     */
+    public function setTraining($training)
+    {
+        $this->training = $training;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegistrations()
+    {
+        return $this->registrations;
+    }
+
+    /**
+     * @param mixed $registrations
+     */
+    public function setRegistrations($registrations)
+    {
+        $this->registrations = $registrations;
+    }
+
 }
 

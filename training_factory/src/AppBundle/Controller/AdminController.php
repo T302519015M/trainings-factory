@@ -43,7 +43,7 @@ class AdminController extends Controller
             $em->persist($training);
 
             $em->flush();
-            $this->addFlash('training-success', 'training toegevoegd');
+            $this->addFlash('success', 'training toegevoegd');
             return $this->redirectToRoute('homepage');
         }
 
@@ -61,6 +61,10 @@ class AdminController extends Controller
         $trainingData = $repo->find($id);
 
         if(!$trainingData){
+
+            $this->addFlash('error', 'voor deze ID is geen training gevonden, updaten mislukt');
+            return $this->redirectToRoute('traininglist');
+
             throw $this->createNotFoundException(
                 'Geen training gevonden voor deze ID:'.$id
             );
@@ -76,7 +80,7 @@ class AdminController extends Controller
             $em->persist($training);
 
             $em->flush();
-            $this->addFlash('training-success', 'training bijgewerkt');
+            $this->addFlash('success', 'training bijgewerkt');
             return $this->redirectToRoute('traininglist');
         }
 
@@ -95,12 +99,22 @@ class AdminController extends Controller
         $repo = $this->getDoctrine()->getRepository(Training::class);
         $training = $repo->find($id);
 
+        if(!$training){
+
+            $this->addFlash('error', 'voor deze ID is geen training gevonden, verwijderen mislukt');
+            return $this->redirectToRoute('traininglist');
+
+            throw $this->createNotFoundException(
+                'Geen training gevonden voor deze ID:'.$id
+            );
+        }
+
         //dump($training);die;
         $em= $this->getDoctrine()->getManager();
         $em->remove($training);
         $em->flush();
 
-        $this->addFlash('deleted-success','training verwijdered');
+        $this->addFlash('success','training verwijdered');
         return $this->redirectToRoute('traininglist');
 
     }
@@ -111,6 +125,8 @@ class AdminController extends Controller
     public function showTrainerAction(Request $request){
         $repo = $this->getDoctrine()->getRepository(Person::class);
         $persons = $repo->findAll();
+
+        $user = $this->getUser();
 
         //convert back to string
         foreach ( $persons as $person) {
@@ -124,7 +140,8 @@ class AdminController extends Controller
         });
 
         return $this->render('admin/trainer/list.html.twig',[
-            'persons'=> $trainers
+            'persons'=> $trainers,
+            'user'=> $user
         ]);
     }
 
@@ -132,7 +149,7 @@ class AdminController extends Controller
      * @Route("/trainer/new",name="add_trainer")
      */
     public function addTrainerAction(Request $request){
-
+        $user = $this->getUser();
         $form = $this->createForm(Trainer::class);
         $form->handleRequest($request);
 
@@ -145,13 +162,15 @@ class AdminController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($trainer);
             $em->flush();
-            $this->addFlash('trainer-succes', 'trainer toegevoegd');
+            $this->addFlash('success', 'trainer toegevoegd');
             return $this->redirectToRoute('homepage');
         }
 
         return $this->render('admin/trainer/trainerCRUD.html.twig',[
             'trainerForm' => $form->createView(),
-            'title'=> 'nieuwe trainer toevoegen'
+            'title'=> 'nieuwe trainer toevoegen',
+            'action'=> 'voeg trainer toe',
+            'user'=> $user
         ]);
     }
 
@@ -164,12 +183,15 @@ class AdminController extends Controller
         $trainerData = $repo->find($id);
 
         if(!$trainerData){
+
+            $this->addFlash('error', 'voor deze ID is geen trainer gevonden, geen wijzigingen mogelijk');
+            return $this->redirectToRoute('list_trainer');
+
             throw $this->createNotFoundException(
                 'Geen trainer gevonden met deze ID:'.$id
             );
         }
 
-        dump($trainerData);
         $role = $trainerData->getRole();
         $trainerData->setRole($role[0]);
 
@@ -186,14 +208,15 @@ class AdminController extends Controller
             $em->persist($trainer);
 
             $em->flush();
-            $this->addFlash('$trainer-success', '$trainer bijgewerkt');
+            $this->addFlash('success', '$trainer bijgewerkt');
             return $this->redirectToRoute('list_trainer');
         }
 
         return $this->render('admin/trainer/trainerCRUD.html.twig', [
             'trainerForm'=>$form->createView(),
             'trainerData'=>$trainerData,
-            'title'=> 'trainer gegevens wijzigen'
+            'title'=> 'trainer gegevens wijzigen',
+            'action'=> 'update gegevens'
         ]);
 
     }
@@ -206,11 +229,21 @@ class AdminController extends Controller
         $repo = $this->getDoctrine()->getRepository(Person::class);
         $person = $repo->find($id);
 
+
+        if(!$person){
+            $this->addFlash('error', 'voor deze ID is geen trainer gevonden, verwijderen mislukt');
+            return $this->redirectToRoute('list_trainer');
+
+            throw $this->createNotFoundException(
+                'Geen trainer gevonden met deze ID:'.$id
+            );
+        }
+
         $em= $this->getDoctrine()->getManager();
         $em->remove($person);
         $em->flush();
 
-        $this->addFlash('deleted-success','trainer verwijdered');
+        $this->addFlash('success','trainer verwijdered');
         return $this->redirectToRoute('list-trainer');
 
     }
