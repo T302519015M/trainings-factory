@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Person;
 use AppBundle\Entity\Training;
+use AppBundle\Form\LidType;
 use AppBundle\Form\TrainingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,13 +16,13 @@ class BezoekerController extends Controller
     /**
      * @Route("/", name="homepage")
      */
+    //homepage
     public function indexAction(Request $request)
     {
         $repo = $this->getDoctrine()->getRepository(Training::class);
         $training = $repo->findAll();
         $user = $this->getUser();
 
-        // replace this example code with whatever you need
         return $this->render('bezoeker/home.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'trainingen' => $training,
@@ -29,8 +31,37 @@ class BezoekerController extends Controller
     }
 
     /**
+     * @Route("/registratie", name="registratie")
+     */
+    public function registrationAction(Request $request){
+
+        $user = $this->getUser();
+        $form = $this->createForm(LidType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $form->getData()->setRole(['ROLE_USER']);
+
+            $this->getDoctrine()
+                ->getRepository(Person::class)
+                ->createPerson($form->getData());
+
+            $this->addFlash('success','registratie gelukt');
+            $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('bezoeker/registratie.html.twig', [
+            'title'=> 'Registratie',
+            'action'=>'registeren',
+            'user'=> $user,
+            'form'=> $form->createView(),
+            ]);
+    }
+
+    /**
      * @Route("/training/list", name="traininglist")
      */
+    //toon lijst met training
     public function showAction(Request $request)
     {
         $repo = $this->getDoctrine()->getRepository(Training::class);
@@ -47,6 +78,7 @@ class BezoekerController extends Controller
     /**
      * @Route("/training/new", name="addtraining")
      */
+    //
     public function addAction(Request $request)
     {
         $form=$this->createForm(TrainingType::class);
@@ -54,13 +86,11 @@ class BezoekerController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $training = $form->getData();
-            //dump($form->getData());die;
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($training);
+            $this->getDoctrine()
+                ->getRepository(Training::class)
+                ->createTraining($form->getData());
 
-            $em->flush();
             $this->addFlash('success', 'training toegevoegd');
             return $this->redirectToRoute('homepage');
         }
@@ -75,25 +105,19 @@ class BezoekerController extends Controller
      */
     public function updateAction(Request $request, $id){
 
-        $repo = $this->getDoctrine()->getRepository(Training::class);
-        $trainingData = $repo->find($id);
+        $trainingRepo = $this->getDoctrine()->getRepository(Training::class);
+        $trainingData = $trainingRepo->findTraining($id);
 
         if(!$trainingData){
-            throw $this->createNotFoundException(
-                'Geen training gevonden voor deze ID:'.$id
-            );
+            $this->addFlash('error', 'Geen training gevonden voor deze ID');
+            return $this->redirectToRoute('traininglist');
         }
 
         $form = $this->createForm(TrainingType::class, $trainingData);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $training = $form->getData();
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($training);
-
-            $em->flush();
+            $trainingRepo->updateTraining($form->getData());
             $this->addFlash('success', 'training bijgewerkt');
             return $this->redirectToRoute('traininglist');
         }
@@ -110,14 +134,15 @@ class BezoekerController extends Controller
      */
     public function removeAction(Request $request, $id){
 
-        $repo = $this->getDoctrine()->getRepository(Training::class);
-        $training = $repo->find($id);
+        $trainingRepo = $this->getDoctrine()->getRepository(Training::class);
+        $trainingData = $trainingRepo->findTraining($id);
 
-        //dump($training);die;
-        $em= $this->getDoctrine()->getManager();
-        $em->remove($training);
-        $em->flush();
+        if($trainingData){
+            $this->addFlash('error','geen training gevonden met deze ID, verwijderen mislukt');
+            return $this->redirectToRoute('traininglist');
+        }
 
+        $trainingRepo->deleteTraining($id);
         $this->addFlash('success','training verwijdered');
         return $this->redirectToRoute('traininglist');
 

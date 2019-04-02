@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Lesson;
-use AppBundle\Form\Les;
+use AppBundle\Form\LesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +14,7 @@ class TrainerController extends controller
     /**
      * @Route("/lessen/list", name="list_les")
      */
+    // toont alle lessen
     public function showLesAction(Request $request){
         $user = $this->getUser();
         $repo = $this->getDoctrine()->getRepository(Lesson::class);
@@ -23,16 +24,15 @@ class TrainerController extends controller
             'lessen'=> $lessen,
             'user'=>$user,
         ]);
-
     }
-
 
     /**
      * @Route("/lessen/new",name="add_les")
      */
+    // lessen toevoegen
     public function addLesAction(Request $request){
         $user = $this->getUser();
-        $form = $this->createForm(Les::class);
+        $form = $this->createForm(LesType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -57,11 +57,12 @@ class TrainerController extends controller
     /**
      * @Route("/lessen/update/{id}",name="update_les")
      */
+    // lessen wijzigen
     public function updateLesAction(Request $request, $id){
         $user = $this->getUser();
         $repo = $this->getDoctrine()->getRepository(Lesson::class);
         $les = $repo->find($id);
-        $form = $this->createForm(Les::class,$les);
+        $form = $this->createForm(LesType::class,$les);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -76,7 +77,7 @@ class TrainerController extends controller
 
         return $this->render("trainer/lessen/lessenCRUD.html.twig",[
             'action'=> 'les updaten',
-            'title'=> 'Les wijzigen',
+            'title'=> 'LesType wijzigen',
             'user'=> $user,
             'lessenForm' => $form->createView()
         ]);
@@ -85,6 +86,7 @@ class TrainerController extends controller
     /**
      * @Route("/lessen/delete/{id}",name="delete_les")
      */
+    //lessen verwijderen
     public function deleteLesAction(Request $request, $id){
         $user = $this->getUser();
         $repo = $this->getDoctrine()->getRepository(Lesson::class);

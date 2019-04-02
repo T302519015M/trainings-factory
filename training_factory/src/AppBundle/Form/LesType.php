@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
-class Les extends AbstractType
+class LesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

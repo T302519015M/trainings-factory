@@ -6,13 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class Trainer extends AbstractType
+class TrainerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('loginName')
+            ->add('loginName', TextType::class ,array('label' => 'Gebruikersnaam'))
             ->add('password')
             ->add('firstName')
             ->add('prefix')
@@ -23,7 +24,7 @@ class Trainer extends AbstractType
                     'Vrouw' => 'vrouw',
                     'Anders' => 'anders',
                     'Geheim' => 'geheim',
-                ],
+                ],'label'=>'geslacht'
             ])
             ->add('email')
             ->add('role' , ChoiceType::class, ['choices' =>

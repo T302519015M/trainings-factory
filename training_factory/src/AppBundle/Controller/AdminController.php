@@ -4,7 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Person;
 use AppBundle\Entity\Training;
-use AppBundle\Form\Trainer;
+use AppBundle\Form\TrainerType;
 use AppBundle\Form\TrainingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -150,7 +150,7 @@ class AdminController extends Controller
      */
     public function addTrainerAction(Request $request){
         $user = $this->getUser();
-        $form = $this->createForm(Trainer::class);
+        $form = $this->createForm(TrainerType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -196,7 +196,7 @@ class AdminController extends Controller
         $trainerData->setRole($role[0]);
 
 
-        $form = $this->createForm(Trainer::class, $trainerData);
+        $form = $this->createForm(TrainerType::class, $trainerData);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){

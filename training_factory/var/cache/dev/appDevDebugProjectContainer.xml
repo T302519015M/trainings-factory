@@ -528,10 +528,13 @@
     <service id="AppBundle\Controller\TrainerController" class="AppBundle\Controller\TrainerController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
     </service>
-    <service id="AppBundle\Form\Les" class="AppBundle\Form\Les" public="false" autowire="true" autoconfigure="true">
+    <service id="AppBundle\Form\LesType" class="AppBundle\Form\LesType" public="false" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="AppBundle\Form\Trainer" class="AppBundle\Form\Trainer" public="false" autowire="true" autoconfigure="true">
+    <service id="AppBundle\Form\LidType" class="AppBundle\Form\LidType" public="false" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="AppBundle\Form\TrainerType" class="AppBundle\Form\TrainerType" public="false" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="AppBundle\Form\TrainingType" class="AppBundle\Form\TrainingType" public="false" autowire="true" autoconfigure="true">
@@ -785,8 +788,9 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
-        <argument>AppBundle\Form\Les</argument>
-        <argument>AppBundle\Form\Trainer</argument>
+        <argument>AppBundle\Form\LesType</argument>
+        <argument>AppBundle\Form\LidType</argument>
+        <argument>AppBundle\Form\TrainerType</argument>
         <argument>AppBundle\Form\TrainingType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
@@ -1001,7 +1005,7 @@
       <argument type="service" id="form.resolved_type_factory"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id="service_locator.biltl78"/>
+      <argument type="service" id="service_locator.gz30ckm"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -3799,10 +3803,12 @@
     <service id="abstract.instanceof.AppBundle\Controller\SecurityController" class="AppBundle\Controller\SecurityController" public="true" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="instanceof.Symfony\Bundle\FrameworkBundle\Controller\Controller.0.AppBundle\Controller\TrainerController" class="AppBundle\Controller\TrainerController" public="true" autowire="true" abstract="true"/>
     <service id="abstract.instanceof.AppBundle\Controller\TrainerController" class="AppBundle\Controller\TrainerController" public="true" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id="instanceof.Symfony\Component\Form\FormTypeInterface.0.AppBundle\Form\Les" class="AppBundle\Form\Les" public="false" autowire="true" abstract="true"/>
-    <service id="abstract.instanceof.AppBundle\Form\Les" class="AppBundle\Form\Les" public="false" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id="instanceof.Symfony\Component\Form\FormTypeInterface.0.AppBundle\Form\Trainer" class="AppBundle\Form\Trainer" public="false" autowire="true" abstract="true"/>
-    <service id="abstract.instanceof.AppBundle\Form\Trainer" class="AppBundle\Form\Trainer" public="false" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id="instanceof.Symfony\Component\Form\FormTypeInterface.0.AppBundle\Form\LesType" class="AppBundle\Form\LesType" public="false" autowire="true" abstract="true"/>
+    <service id="abstract.instanceof.AppBundle\Form\LesType" class="AppBundle\Form\LesType" public="false" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id="instanceof.Symfony\Component\Form\FormTypeInterface.0.AppBundle\Form\LidType" class="AppBundle\Form\LidType" public="false" autowire="true" abstract="true"/>
+    <service id="abstract.instanceof.AppBundle\Form\LidType" class="AppBundle\Form\LidType" public="false" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id="instanceof.Symfony\Component\Form\FormTypeInterface.0.AppBundle\Form\TrainerType" class="AppBundle\Form\TrainerType" public="false" autowire="true" abstract="true"/>
+    <service id="abstract.instanceof.AppBundle\Form\TrainerType" class="AppBundle\Form\TrainerType" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="instanceof.Symfony\Component\Form\FormTypeInterface.0.AppBundle\Form\TrainingType" class="AppBundle\Form\TrainingType" public="false" autowire="true" abstract="true"/>
     <service id="abstract.instanceof.AppBundle\Form\TrainingType" class="AppBundle\Form\TrainingType" public="false" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="service_locator.jwewuuw" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -3836,11 +3842,12 @@
         <argument key="inline" type="service" id="fragment.renderer.inline"/>
       </argument>
     </service>
-    <service id="service_locator.biltl78" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id="service_locator.gz30ckm" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="AppBundle\Form\Les" type="service" id="AppBundle\Form\Les"/>
-        <argument key="AppBundle\Form\Trainer" type="service" id="AppBundle\Form\Trainer"/>
+        <argument key="AppBundle\Form\LesType" type="service" id="AppBundle\Form\LesType"/>
+        <argument key="AppBundle\Form\LidType" type="service" id="AppBundle\Form\LidType"/>
+        <argument key="AppBundle\Form\TrainerType" type="service" id="AppBundle\Form\TrainerType"/>
         <argument key="AppBundle\Form\TrainingType" type="service" id="AppBundle\Form\TrainingType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service" id="form.type.entity"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service" id="form.type.choice"/>
