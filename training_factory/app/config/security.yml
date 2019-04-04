@@ -9,7 +9,7 @@ security:
                 users:
                     ryan:
                         password: $2y$12$0VYtpI.QV8ZOkeTJbYhxPOnkWIQImWfi6aMjP4uC72lpJgYIYQX0u
-                        roles: 'ROLE_USER'
+                        roles: 'ROLE_MEMBER'
                     admin:
                         password: $2y$12$Nh2957IPt.XpNK1RBn.QLeHz7Yk1aqUFgvulqn/IUM0Hx9qUZ5jIa
                         roles: 'ROLE_ADMIN'

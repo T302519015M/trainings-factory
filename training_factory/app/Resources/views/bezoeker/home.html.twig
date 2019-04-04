@@ -1,33 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Training Factory</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
-                <li><a href="{{ path('traininglist')}}">training</a></li>
-                <li><a href="{{ path('list_les') }}">lessen</a></li>
-                <li><a href="{{ path('list_trainer')}}">trainers</a></li>
-            </ul>
-            {% if user == null %}
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path('login') }}">inloggen </a></li>
-                    <li> <a href="{{ path('registratie') }}"> registeren</a></li>
-                </ul>
-            {% endif %}
+    {#<nav class="navbar navbar-inverse navbar-fixed-top">#}
+        {#<div class="container-fluid">#}
+            {#<div class="navbar-header">#}
+                {#<a class="navbar-brand" href="#">Training Factory</a>#}
+            {#</div>#}
+            {#<ul class="nav navbar-nav">#}
+                {#<li class="active"><a href="{{ path('homepage') }}">Home</a></li>#}
+                {#<li><a href="{{ path('traininglist')}}">training</a></li>#}
+                {#<li><a href="{{ path('list_les') }}">lessen</a></li>#}
+                {#<li><a href="{{ path('list_lid') }}">leden</a></li>#}
+                {#<li><a href="{{ path('list_trainer')}}">trainers</a></li>#}
+            {#</ul>#}
+            {#{% if user == null %}#}
+                {#<ul class="nav navbar-nav navbar-right">#}
+                    {#<li><a href="{{ path('login') }}">inloggen </a></li>#}
+                    {#<li> <a href="{{ path('registratie') }}"> registeren</a></li>#}
+                {#</ul>#}
+            {#{% endif %}#}
 
-            {% if not user == null %}
-                <div class="nav navbar-right user-detail">
-                <span class="user">
-                    welkom, {{ user.username }} <button class="bnt"><a href="{{ path('logout') }}">uitloggen</a></button>
-                </span>
-                </div>
-            {% endif %}
-        </div>
-    </nav>
+            {#{% if not user == null %}#}
+                {#<div class="nav navbar-right user-detail">#}
+                {#<span class="user">#}
+                    {#welkom, {{ user.username }} <button class="bnt"><a href="{{ path('logout') }}">uitloggen</a></button>#}
+                {#</span>#}
+                {#</div>#}
+            {#{% endif %}#}
+        {#</div>#}
+    {#</nav>#}
 
 <div class="container-fluid training-box">
 

@@ -25,19 +25,19 @@
                 login
             </div>
             {#<div class="col-sm-1">#}
-                {#password#}
+            {#password#}
             {#</div>#}
             <div class="col-sm-1">
                 first name
             </div>
             {#<div class="col-sm-1">#}
-                {#prefix#}
+            {#prefix#}
             {#</div>#}
             <div class="col-sm-1">
                 last name
             </div>
             {#<div class="col-sm-1">#}
-                {#date Of Birth#}
+            {#date Of Birth#}
             {#</div>#}
             <div class="col-sm-1">
                 gender
@@ -47,12 +47,6 @@
             </div>
             <div class="col-sm-1">
                 role
-            </div>
-            {#<div class="col-sm-1">#}
-                {#hire date#}
-            {#</div>#}
-            <div class="col-sm-1">
-                salary
             </div>
             <div class="col-sm-1">
                 street
@@ -76,19 +70,19 @@
                     {{ person.loginName }}
                 </div>
                 {#<div class="col-sm-1">#}
-                    {#{{ person.password  }}#}
+                {#{{ person.password  }}#}
                 {#</div>#}
                 <div class="col-sm-1">
                     {{person.firstName}}
                 </div>
                 {#<div class="col-sm-1">#}
-                    {#{{person.prefix}}#}
+                {#{{person.prefix}}#}
                 {#</div>#}
                 <div class="col-sm-1">
                     {{person.lastName}}
                 </div>
                 {#<div class="col-sm-1">#}
-                    {#disabled#}{#{{person.dateOfBirth}}#}
+                {#disabled#}{#{{person.dateOfBirth}}#}
                 {#</div>#}
                 <div class="col-sm-1">
                     {{person.gender}}
@@ -97,13 +91,10 @@
                     {{person.email}}
                 </div>
                 <div class="col-sm-1">
-                    {{person.role}}
-                </div>
-                {#<div class="col-sm-1">#}
-                    {#disabled#}{#{{person.hire_date}}#}
-                {#</div>#}
-                <div class="col-sm-1">
-                    {{person.salary}}
+
+                    {% for rol in person.role %}
+                        {{ rol }}
+                    {% endfor %}
                 </div>
                 <div class="col-sm-1">
                     {{person.street}}
@@ -116,18 +107,18 @@
                 </div>
                 <div class="col-sm-1">
                     <span>
-                        <a title="Edit" href="{{ path('update_trainer',{id:person.id}) }}"><i class="fas fa-pen"></i></a>
+                        <a title="Edit" href="{{ path('update_lid',{id:person.id}) }}"><i class="fas fa-pen"></i></a>
                     </span>
-                    <span>
-                       <a  title="Delete" href="{{ path('delete_trainer',{id:person.id}) }}"> <i class="fas fa-trash-alt"></i></a>
-                    </span>
+                    {#<span>#}
+                        {#<a title="Delete" href="{{ path('delete_lid',{id:person.id}) }}"> <i class="fas fa-trash-alt"></i></a>#}
+                    {#</span>#}
                 </div>
             </div>
 
         {% endfor %}
         <div class="add-button">
             <button class="btn btn-primary">
-                <a href="{{path('add_trainer')}}"><i class="fas fa-plus"></i> Add trainer</a>
+                <a href="{{path('add_lid')}}"><i class="fas fa-plus"></i> Add member</a>
             </button>
         </div>
     </div>

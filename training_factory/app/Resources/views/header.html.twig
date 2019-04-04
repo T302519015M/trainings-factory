@@ -1,0 +1,52 @@
+
+{#{{ dump(is_granted('ROLE_ADMIN')) }}#}
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Training Factory</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('homepage') }}">Home</a></li>
+                <li><a href="{{ path('homepage') }}">overzicht</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('traininglist')}}">training</a></li>
+                    <li><a href="{{ path('list_les') }}">lessen</a></li>
+                    <li><a href="{{ path('list_lid') }}">leden</a></li>
+                    <li><a href="{{ path('list_trainer')}}">trainers</a></li>
+                {% endif %}
+            </ul>
+            {% if not app.user %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path('login') }}">inloggen </a></li>
+                    <li> <a href="{{ path('registratie') }}"> registeren</a></li>
+                </ul>
+            {% else %}
+                <div class="nav navbar-right user-detail">
+                <span class="user">
+                    welkom, {{ app.user.username }} <button class="bnt"><a href="{{ path('logout') }}">uitloggen</a></button>
+                </span>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
+
+
+{% block stylesheets %}
+    <style>
+        .card-ref a{
+            width: 80px;
+        }
+        .user-detail{
+            padding:15px;
+        }
+
+        .user{
+            color:white;
+        }
+      
+    </style>
+{% endblock %}
+
+
+

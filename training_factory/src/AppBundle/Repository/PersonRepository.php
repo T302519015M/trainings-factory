@@ -19,6 +19,43 @@ class PersonRepository extends EntityRepository{
         $this->getEntityManager()->flush();
     }
 
+    //update persoon
+    public function updatePerson($person){
+        $this->getEntityManager()->persist($person);
+        $this->getEntityManager()->flush();
+    }
 
+    //delete persoon
+    public function deletePerson($person){
+        $this->getEntityManager()->remove($person);
+        $this->getEntityManager()->flush();
+    }
+
+    //zoek personen met rol
+    public function findAllPersonsWithRole($role)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.role LIKE :role')
+            ->setParameter('role', $role)
+            ->getQuery();
+        $members = $query->getResult();
+
+        return $members;
+    }
+
+    //geef alle gebruikers terug
+    public function findAllUser(){
+        return $this->findAll();
+    }
+
+    //geef alle leden
+    public function findAllMembers(){
+        return $this->findAllPersonsWithRole('["ROLE_MEMBER"]');
+    }
+
+    //geef alle admins
+    public function findAllAdmin(){
+        return $this->findAllPersonsWithRole('["ROLE_ADMIN"]');
+    }
 
 }

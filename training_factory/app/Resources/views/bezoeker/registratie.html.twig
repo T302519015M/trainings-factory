@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container">
+
+    {#{%if not passwordMatch %}#}
+        {#waarde: {{dump(passwordMatch) }}#}
+    {#{% endif %}#}
+
+<div class="container header-fix">
     <div class="row">
         <div class="col-xs-12">
             <h1>{{ title }}</h1>
@@ -16,4 +21,8 @@
         </div>
     </div>
 </div>
+    <div class="container-fluid">
+        password:{{ wachtwoord }}
+    </div>
+    {{ dump(wachtwoord) }}
 {%  endblock body %}

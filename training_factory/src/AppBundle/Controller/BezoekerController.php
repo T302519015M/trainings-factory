@@ -39,15 +39,21 @@ class BezoekerController extends Controller
         $form = $this->createForm(LidType::class);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $form->getData()->setRole(['ROLE_USER']);
+        if($form->get('passCheck')->getData() === $form->get('password')->getData()){
+            $passwordMatch = true;
+        }else{
+            $passwordMatch = false;
+        }
+
+        if( $form->isSubmitted() && $form->isValid()){
+            $form->getData()->setRole(['ROLE_MEMBER']);
 
             $this->getDoctrine()
                 ->getRepository(Person::class)
                 ->createPerson($form->getData());
 
             $this->addFlash('success','registratie gelukt');
-            $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('bezoeker/registratie.html.twig', [
@@ -55,6 +61,7 @@ class BezoekerController extends Controller
             'action'=>'registeren',
             'user'=> $user,
             'form'=> $form->createView(),
+            'passwordMatch' => $passwordMatch,
             ]);
     }
 

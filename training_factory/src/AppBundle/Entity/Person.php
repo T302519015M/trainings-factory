@@ -25,15 +25,15 @@ class Person
 
     /**
      * @var string
-     *
      * @ORM\Column(name="login_name", type="string", length=20)
+     * @Assert\NotBlank(message="gebruikersnaam is vereist")
      */
     private $loginName;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="password", type="string", length=65)
+     * @Assert\NotBlank(message="wachtwoord mag niet leeg zijn")
      */
     private $password;
 
@@ -41,19 +41,19 @@ class Person
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=25)
+     * @Assert\NotBlank(message="voornaam is vereist")
      */
     private $firstName;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="prefix", type="string", length=10, nullable=true)
      */
     private $prefix;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="achternaam is vereist")
      * @ORM\Column(name="last_name", type="string", length=35)
      */
     private $lastName;
@@ -62,20 +62,21 @@ class Person
      * @var \DateTime
      *
      * @ORM\Column(name="date_of_birth", type="date")
+     * @Assert\NotBlank(message="geboortedatum kan niet leeg zijn")
      */
     private $dateOfBirth;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="kies een geslacht")
      * @ORM\Column(name="gender", type="string", length=255)
      */
     private $gender;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank(message="E-mail is vereist")
      */
     private $email;
 
@@ -88,30 +89,34 @@ class Person
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="hire_date", type="date")
+     * @ORM\Column(name="hire_date", type="date", nullable=true)
+     *
      */
     private $hire_date;
 
     /**
-     * @ORM\Column(name="salary", type="decimal", precision=7, scale=2)
+     * @ORM\Column(name="salary", type="decimal", precision=7, scale=2, nullable=true)
      */
     private $salary;
 
     /**
      * @var string
-     * @ORM\Column(name="street", type="string", length=50)
+     * @ORM\Column(name="street", type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message="straat met huisnummer ontbreekt")
      */
     private $street;
 
     /**
      * @var string
      * @ORM\Column(name="postal_code",type="string", length=10)
+     * @Assert\NotBlank(message="postcode ontbreekt")
      */
     private $postal_code;
 
     /**
      * @var string
      * @ORM\Column(name="place",type="string", length=35)
+     * @Assert\NotBlank(message="woonplaats ontbreekt")
      */
     private $place;
 

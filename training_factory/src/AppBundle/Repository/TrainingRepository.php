@@ -28,8 +28,7 @@ class TrainingRepository extends EntityRepository
     }
 
     //training verwijderen
-    public function deleteTraining($id){
-         $training = $this->find($id);
+    public function deleteTraining($training){
 
          if($training){
              $this->getEntityManager()->remove($training);

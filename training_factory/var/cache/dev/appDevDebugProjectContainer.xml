@@ -2509,7 +2509,7 @@
         <argument key="ryan" type="collection">
           <argument key="password">$2y$12$0VYtpI.QV8ZOkeTJbYhxPOnkWIQImWfi6aMjP4uC72lpJgYIYQX0u</argument>
           <argument key="roles" type="collection">
-            <argument>ROLE_USER</argument>
+            <argument>ROLE_MEMBER</argument>
           </argument>
         </argument>
         <argument key="admin" type="collection">
