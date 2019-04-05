@@ -198,7 +198,7 @@ class AdminController extends Controller
 
         $repo->deletePerson($person);
         $this->addFlash('success','trainer verwijdered');
-        return $this->redirectToRoute('list-trainer');
+        return $this->redirectToRoute('list_trainer');
     }
 
     /**
@@ -252,7 +252,7 @@ class AdminController extends Controller
                 ->getRepository(Person::class)
                 ->createPerson($form->getData());
 
-            $this->addFlash('success','registratie gelukt');
+            $this->addFlash('success','lid toegevoegd');
             return $this->redirectToRoute('list_lid');
         }
 
@@ -292,6 +292,23 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * @Route("leden/delete/{id}",name="delete_lid")
+     */
+    public function deleteLidAction(Request $request, $id){
+        $repo = $this->getDoctrine()->getRepository(Person::class);
+        $lid = $repo->find($id);
 
+        if(!$lid){
+            $this->addFlash('error', 'voor deze ID is geen trainer gevonden, verwijderen mislukt');
+            return $this->redirectToRoute('list_trainer');
+            throw $this->createNotFoundException('Geen trainer gevonden met deze ID:'.$id);
+        }
+
+        $repo->deletePerson($lid);
+        $this->addFlash('success','lid verwijdered');
+        return $this->redirectToRoute('list_lid');
+
+    }
 
 }

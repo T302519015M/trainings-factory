@@ -39,7 +39,6 @@ class PersonRepository extends EntityRepository{
             ->setParameter('role', $role)
             ->getQuery();
         $members = $query->getResult();
-
         return $members;
     }
 
@@ -56,6 +55,17 @@ class PersonRepository extends EntityRepository{
     //geef alle admins
     public function findAllAdmin(){
         return $this->findAllPersonsWithRole('["ROLE_ADMIN"]');
+    }
+
+    public function findByUsername($username)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->where('p.loginName LIKE :username')
+            ->setParameter('username', $username)
+            ->getQuery();
+        $member = $query->getResult();
+
+        return $member;
     }
 
 }

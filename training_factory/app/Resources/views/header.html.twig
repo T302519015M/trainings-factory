@@ -15,6 +15,9 @@
                     <li><a href="{{ path('list_lid') }}">leden</a></li>
                     <li><a href="{{ path('list_trainer')}}">trainers</a></li>
                 {% endif %}
+                {% if app.user %}
+                    <li><a href="{{ path('update_self',{user:app.user.username})}}">gegevens</a></li>
+                {% endif %}
             </ul>
             {% if not app.user %}
                 <ul class="nav navbar-nav navbar-right">

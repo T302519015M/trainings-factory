@@ -518,6 +518,9 @@
     <service id="AppBundle\Controller\BezoekerController" class="AppBundle\Controller\BezoekerController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
     </service>
+    <service id="AppBundle\Controller\LidController" class="AppBundle\Controller\LidController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+    </service>
     <service id="AppBundle\Controller\SecurityController" class="AppBundle\Controller\SecurityController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -3798,6 +3801,8 @@
     <service id="abstract.instanceof.AppBundle\Controller\AdminController" class="AppBundle\Controller\AdminController" public="true" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="instanceof.Symfony\Bundle\FrameworkBundle\Controller\Controller.0.AppBundle\Controller\BezoekerController" class="AppBundle\Controller\BezoekerController" public="true" autowire="true" abstract="true"/>
     <service id="abstract.instanceof.AppBundle\Controller\BezoekerController" class="AppBundle\Controller\BezoekerController" public="true" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id="instanceof.Symfony\Bundle\FrameworkBundle\Controller\Controller.0.AppBundle\Controller\LidController" class="AppBundle\Controller\LidController" public="true" autowire="true" abstract="true"/>
+    <service id="abstract.instanceof.AppBundle\Controller\LidController" class="AppBundle\Controller\LidController" public="true" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="instanceof.Symfony\Component\DependencyInjection\ServiceSubscriberInterface.0.AppBundle\Controller\SecurityController" class="AppBundle\Controller\SecurityController" public="true" autowire="true" abstract="true"/>
     <service id="instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.AppBundle\Controller\SecurityController" class="AppBundle\Controller\SecurityController" public="true" autowire="true" abstract="true"/>
     <service id="abstract.instanceof.AppBundle\Controller\SecurityController" class="AppBundle\Controller\SecurityController" public="true" autowire="true" autoconfigure="true" abstract="true"/>

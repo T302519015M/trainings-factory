@@ -1,3 +1,13 @@
+
+.but-fix{
+    margin: 2rem 0 0 0 !important;
+}
+
 .header-fix{
     margin: 6rem;
+}
+
+.rood {
+    color: red !important;
+    background: red !important;
 }

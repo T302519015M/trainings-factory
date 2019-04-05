@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Lesson;
+use AppBundle\Entity\Person;
 use AppBundle\Form\LesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,13 +17,11 @@ class TrainerController extends controller
      */
     // toont alle lessen
     public function showLesAction(Request $request){
-        $user = $this->getUser();
         $repo = $this->getDoctrine()->getRepository(Lesson::class);
         $lessen = $repo->findAll();
 
         return $this->render("trainer/lessen/list.html.twig",[
             'lessen'=> $lessen,
-            'user'=>$user,
         ]);
     }
 
@@ -31,17 +30,12 @@ class TrainerController extends controller
      */
     // lessen toevoegen
     public function addLesAction(Request $request){
-        $user = $this->getUser();
         $form = $this->createForm(LesType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $les = $form->getData();
-            //dump($les);die;
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($les);
-            $em->flush();
 
+            $this->getDoctrine()->getRepository(Lesson::class)->createLesson($form->getData());
             $this->addFlash('success', 'les toegevoegd');
             return $this->redirectToRoute('list_les');
         }
@@ -49,7 +43,6 @@ class TrainerController extends controller
          return $this->render("trainer/lessen/lessenCRUD.html.twig",[
             'action'=> 'voeg les toe',
             'title'=> 'Les toevoegen',
-            'user'=> $user,
             'lessenForm' => $form->createView()
          ]);
     }
@@ -59,18 +52,13 @@ class TrainerController extends controller
      */
     // lessen wijzigen
     public function updateLesAction(Request $request, $id){
-        $user = $this->getUser();
         $repo = $this->getDoctrine()->getRepository(Lesson::class);
         $les = $repo->find($id);
         $form = $this->createForm(LesType::class,$les);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $les = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($les);
-            $em->flush();
-
+            $repo->updateLesson($form->getData());
             $this->addFlash('success', 'les gewijzigd');
             return $this->redirectToRoute('list_les');
         }
@@ -78,7 +66,6 @@ class TrainerController extends controller
         return $this->render("trainer/lessen/lessenCRUD.html.twig",[
             'action'=> 'les updaten',
             'title'=> 'LesType wijzigen',
-            'user'=> $user,
             'lessenForm' => $form->createView()
         ]);
     }
@@ -88,22 +75,17 @@ class TrainerController extends controller
      */
     //lessen verwijderen
     public function deleteLesAction(Request $request, $id){
-        $user = $this->getUser();
         $repo = $this->getDoctrine()->getRepository(Lesson::class);
         $les = $repo->find($id);
         $lessen = $repo->findAll();
 
         if($les){
-           $em = $this->getDoctrine()->getManager();
-           $em->remove($les);
-           $em->flush();
-
+           $repo->deleteLesson($les);
            $this->addFlash('success', 'les verwijdererd');
            return $this->redirectToRoute('list_les');
         }
 
         return $this->render("trainer/lessen/list.html.twig",[
-            'user'=> $user,
             'lessen'=> $lessen,
         ]);
     }
