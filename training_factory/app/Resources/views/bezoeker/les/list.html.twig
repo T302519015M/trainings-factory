@@ -1,0 +1,134 @@
+{%  extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container-fluid training-box">
+
+        {%  for msg in app.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ msg }}
+            </div>
+
+        {%  endfor %}
+
+        {%  for msg in app.session.flashBag.get('error') %}
+            <div class="alert alert-danger">
+                {{ msg }}
+            </div>
+
+        {% endfor %}
+
+        <div class="row meta-data">
+            <div class="col-sm-1">
+                Name
+            </div>
+            <div class="col-sm-1">
+                Instructeur
+            </div>
+            <div class="col-sm-1">
+                time
+            </div>
+            <div class="col-sm-1">
+                Date
+            </div>
+            <div class="col-sm-2">
+                Location
+            </div>
+            <div class="col-sm-2">
+                aantal deelnemers
+            </div>
+            <div class="col-sm-1">
+                Max Persons
+            </div>
+            <div class="col-sm-2">
+                options
+            </div>
+        </div>
+        {% for les in lessen %}
+            <div class="row">
+                <div class="col-sm-1">
+                    {{les.training.name}}
+                </div>
+                <div class="col-sm-1">
+                    {{les.instructor.LoginName}}
+                </div>
+                <div class="col-sm-1">
+                    {{ les.time }}
+                </div>
+                <div class="col-sm-1">
+                    {{ les.date|date("d-m-Y") }}
+                </div>
+                <div class="col-sm-2">
+                    {{les.location}}
+                </div>
+                <div class="col-sm-2">
+                    {#{% for registration in les.registrations %}#}
+                        {#{{ registration.member.firstName }}#}
+                    {#{% endfor %}#}
+                    {{ les.registrations|length  }}
+                </div>
+                <div class="col-sm-1">
+                    {{les.maxPersons}} persons
+                </div>
+                <div class="col-sm-2">
+                    <span>
+                        {%  if (les.registrations|length) <  les.maxPersons  %}
+                            <a title="Edit" href="{{ path('inschrijven_les_lid',{id:les.id}) }}"><i class="fas fa-pen"></i>inschrijven</a>
+                        {% else %}
+                            <i class="fas fa-timess"></i>unavailable</a>
+                        {% endif %}
+                    </span>
+                    {#<span>#}
+                       {#<a  title="Delete" href="{{ path('delete_les',{id:les.id}) }}"> <i class="fas fa-trash-alt"></i>uitschrijven</a>#}
+                    {#</span>#}
+                </div>
+            </div>
+
+        {% endfor %}
+        <div class="add-button">
+            <button class="btn btn-primary">
+                <a href="{{path('add_les')}}"><i class="fas fa-plus"></i> voeg les toe</a>
+            </button>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block stylesheets %}
+    <style>
+
+        .user-detail{
+            padding: 15px;
+        }
+
+        .user{
+            color: white;
+        }
+
+        .training-box{
+            margin-top:8rem;
+        }
+
+        .meta-data{
+            font-weight: 900;
+            font-size: 16px;
+            border-bottom: #3c3c3c 1px solid;
+            margin-bottom: 0.5rem;
+        }
+
+        span{
+            margin-right: 0.5rem;
+        }
+
+        .add-button {
+            margin-top:2rem;
+        }
+        .add-button a {
+            color:white;
+            text-decoration: none;
+        }
+
+    </style>
+{% endblock %}

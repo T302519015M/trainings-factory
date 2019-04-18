@@ -4,6 +4,9 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
+        chain_provider:
+            chain:
+                providers: [in_memory, user_db]
         in_memory:
             memory:
                 users:
@@ -19,11 +22,17 @@ security:
                     test:
                         password: $2y$12$6xaiKvf4fFNaRzDlf0ZCLOJGKFd.efxeYhVoOabWEZwCexmPpvKZC
                         roles: 'ROLE_ADMIN'
+        user_db:
+            entity:
+                class: AppBundle\Entity\Person
+                property: loginName
 
     encoders:
         Symfony\Component\Security\Core\User\User:
             algorithm: 'bcrypt'
             cost:      12
+
+        AppBundle\Entity\Person: plaintext
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -34,6 +43,7 @@ security:
         main:
             anonymous: ~
             http_basic: ~
+            provider: chain_provider
             form_login:
                 login_path: login
                 check_path: login

@@ -36,8 +36,9 @@ class AdminController extends Controller
         if($form->isSubmitted() && $form->isValid()){
 
             $this->getDoctrine()->getRepository(Training::class)->createTraining($form->getData());
+            dump($form);die;
             $this->addFlash('success', 'training toegevoegd');
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('traininglist');
         }
 
         return $this->render('bezoeker/training/new.html.twig', [

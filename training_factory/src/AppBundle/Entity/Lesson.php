@@ -73,8 +73,6 @@ class Lesson
         $this->registrations = new ArrayCollection();
     }
 
-
-
     /**
      * Get id
      *
